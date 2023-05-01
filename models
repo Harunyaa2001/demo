@@ -1,0 +1,57 @@
+Employee model
+
+namespace SwaggerDemo.Models
+{
+    public class Employee
+    {
+        public int EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
+        public string Email { get; set; }
+        public long Phone { get; set; }
+        public long Salary { get; set; }
+        public int Experience { get; set; }
+        public Department Department { get; set; }
+
+    }
+}
+
+
+Department model :
+
+using System.Collections.Generic;
+//using System.ComponentModel.DataAnnotations;
+namespace SwaggerDemo.Models
+{
+    public class Department
+    {
+       // [Key]
+        public int DepartmentId { get; set; }
+        //[Required]
+        //[StringLength(50)]
+        //public string DepartmentName { get; set; }
+        //[Required]
+        //[StringLength(30)]
+        public string Location { get; set; }
+        public ICollection<Employee> Employees { get; set; }
+    }
+}
+
+
+Context model :
+
+using Microsoft.EntityFrameworkCore;
+namespace SwaggerDemo.Models
+{
+    public class MyDbContext : DbContext
+    {
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+        {
+
+        }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department> Departments { get; set; }
+
+    }
+}
